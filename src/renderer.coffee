@@ -11,13 +11,28 @@ if system.args.length < 3
 	console.log 'Usage: render.js <url> <dir> <filename>'
 	phantom.exit()
 
+unless fs.isFile 'app/assets/index.html'
+	console.error 'no index.html found at \'app/assets\''
+	phantom.exit()
+
+index = fs.read 'app/assets/index.html'
+
 page.open address, (status) ->
 	if (status isnt 'success')
 		console.log('FAIL to load the address')
 		phantom.exit()
 	else
-		html = page.evaluate () ->
-			return document.getElementsByTagName('html')[0].outerHTML
+		page.viewportSize = { width: 768, height: 1024 }
+		body = page.evaluate () ->
+			return document.getElementsByTagName('body')[0].outerHTML
+
+		bodyIndex = index.indexOf index.match(/<body>/)[0]
+
+		header = index.slice 0, bodyIndex
+
+		html = header + body + '</hmtl>'
+
+		#console.log html
 
 		console.log 'writing ', dir + '/' + filename 
 		fs.write dir + '/' + filename , html, 'w'
