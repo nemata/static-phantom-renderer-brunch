@@ -1,6 +1,6 @@
 {
   "name": "static-phantom-renderer-brunch",
-  "version": "0.0.16",
+  "version": "0.1.45",
   "keywords": [
     "brunch",
     "phantomjs"
