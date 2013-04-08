@@ -1,6 +1,6 @@
 {
   "name": "static-phantom-renderer-brunch",
-  "version": "0.0.1",
+  "version": "0.0.16",
   "keywords": [
     "brunch",
     "phantomjs"
@@ -24,12 +24,11 @@
   },
   "dependencies": {
     "coffee-script": "1.3.3",
-    "http-server": "*"
+    "http-server": "*",
+    "underscore": "*"
   },
   "devDependencies": {
     "mocha": "1.3.2",
     "chai": "1.2.0"
-  },
-  "readmeFilename": "README.md",
-  "_id": "static-phantom-renderer-brunch@0.0.1"
+  }
 }

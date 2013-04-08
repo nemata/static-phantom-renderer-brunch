@@ -1,15 +1,35 @@
 sysPath = require 'path'
 WebServer = (require 'http-server')
+_ = require 'underscore'
 
-module.exports = class AutoReloader
+module.exports = class StaticPhantomRenderer
 	brunchPlugin: yes
 
 	constructor: (@config) ->
-		console.log @config
-		@enabled = false
+		@enabled = @config.optimize
+		@paths = @config.staticPhantomRenderer.paths
 
-	onCompile: (changedFiles) ->
-		return
+	onCompile: (data, path, callback) ->
+		#if @enabled
+			# parse paths
+			console.log 'onCompile'
+			loadPaths = []
+			_.each @paths, (path) ->
+				if path.match /\[\d+\.{2}\d+\]/
+					pathPrefix = path.replace /\[.*/, ''
+					min = path.replace /.*\[/, ''
+					max = min.replace /.*\.\./, ''
+					min = parseInt min.replace /\.\..*/, ''
+					max = parseInt max.replace /\]/, ''
+					for i in [min..max]
+						loadPaths.push pathPrefix + i
+				else
+					loadPaths.push path
+			console.log loadPaths
+
+
+
+			return
 
 
 
