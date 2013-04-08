@@ -1,13 +1,15 @@
 {
   "name": "static-phantom-renderer-brunch",
-  "version": "0.1.45",
+  "version": "0.2.0",
   "keywords": [
     "brunch",
     "phantomjs"
   ],
   "description": "Renders all pages of given Sitemap with phantomjs and copys rendered HTML to public",
   "author": {
-    "name": "Jan Schlotte, nemata.com"
+    "name": "Jan Schlotte, némata GmbH",
+    "email": "schlotte@nemata.com",
+    "url": "http://nemata.com"
   },
   "homepage": "https://github.com/janschlotte/static-phantom-renderer-brunch",
   "repository": {
