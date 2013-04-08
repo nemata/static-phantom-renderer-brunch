@@ -1,0 +1,35 @@
+{
+  "name": "static-phantom-renderer-brunch",
+  "version": "0.0.1",
+  "keywords": [
+    "brunch",
+    "phantomjs"
+  ],
+  "description": "Renders all pages of given Sitemap with phantomjs and copys rendered HTML to public",
+  "author": {
+    "name": "Jan Schlotte, nemata.com"
+  },
+  "homepage": "https://github.com/janschlotte/static-phantom-renderer-brunch",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:janschlotte/static-phantom-renderer-brunch.git"
+  },
+  "main": "./lib/index",
+  "scripts": {
+    "postinstall": "node setup.js postinstall",
+    "test": "node setup.js test"
+  },
+  "engines": {
+    "node": "~0.6.10 || 0.8 || 0.9"
+  },
+  "dependencies": {
+    "coffee-script": "1.3.3",
+    "http-server": "*"
+  },
+  "devDependencies": {
+    "mocha": "1.3.2",
+    "chai": "1.2.0"
+  },
+  "readmeFilename": "README.md",
+  "_id": "static-phantom-renderer-brunch@0.0.1"
+}
