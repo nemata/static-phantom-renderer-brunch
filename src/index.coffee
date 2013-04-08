@@ -7,7 +7,7 @@ module.exports = class StaticPhantomRenderer
 	brunchPlugin: yes
 
 	constructor: (@config) ->
-		@enabled = @config.optimize
+		@enabled = @config.optimize and @config.staticPhantomRenderer
 		@paths = @config.staticPhantomRenderer.paths
 		@host = @config.staticPhantomRenderer.host
 		@public = @config.paths.public
@@ -30,14 +30,14 @@ module.exports = class StaticPhantomRenderer
 
 			# starting server, unless host given
 			unless @host
-				@host = 'http://localhost:8080/'
-				@server = exec "http-server #{@public}", (error, stdout, stderr) =>
+				@host = 'http://localhost:1823/'
+				@server = exec "http-server -p 1823 #{@public}", (error, stdout, stderr) =>
 					if error
 						@server.kill()
 						return error
 					console.log '[static-renderer] ' + stdout if stdout
 					console.log '[static-renderer] err: ' + stderr if stderr
-				console.log '[static-renderer] starting webserver and serving ' + @public
+				console.log '[static-renderer] starting webserver and serving ' + @public + ' on port 1823'
 			else
 				@host += '/' unless @host.match /\/$/
 				console.log '[static-renderer] loading paths form ' + @host
