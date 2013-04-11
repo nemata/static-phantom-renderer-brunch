@@ -26,13 +26,14 @@ page.open address, (status) ->
 		body = page.evaluate () ->
 			return document.getElementsByTagName('body')[0].outerHTML
 
-		bodyIndex = index.indexOf index.match(/<body>/)[0]
+		headIndex = index.indexOf index.match(/<head>/)[0]
 
-		header = index.slice 0, bodyIndex
+		head = index.slice 0, headIndex
 
-		html = header + body + '</hmtl>'
+		header = page.evaluate () ->
+			return document.getElementsByTagName('head')[0].outerHTML
 
-		#console.log html
+		html = head + header + body + '</hmtl>'
 
 		console.log 'writing ', dir + '/' + filename 
 		fs.write dir + '/' + filename , html, 'w'

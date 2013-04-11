@@ -7,7 +7,10 @@ module.exports = class StaticPhantomRenderer
 	brunchPlugin: yes
 
 	constructor: (@config) ->
-		@enabled = @config.optimize and @config.staticPhantomRenderer
+		@enabled = @config.optimize and !!@config.staticPhantomRenderer
+
+		return unless @enabled
+
 		@paths = @config.staticPhantomRenderer.paths
 		@host = @config.staticPhantomRenderer.host
 		@public = @config.paths.public
