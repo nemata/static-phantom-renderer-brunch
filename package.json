@@ -11,10 +11,10 @@
     "email": "schlotte@nemata.com",
     "url": "http://nemata.com"
   },
-  "homepage": "https://github.com/janschlotte/static-phantom-renderer-brunch",
+  "homepage": "https://github.com/nemata/static-phantom-renderer-brunch",
   "repository": {
     "type": "git",
-    "url": "git@github.com:janschlotte/static-phantom-renderer-brunch.git"
+    "url": "git@github.com:nemata/static-phantom-renderer-brunch.git"
   },
   "main": "./lib/index",
   "scripts": {
