@@ -33,34 +33,49 @@ module.exports = class StaticPhantomRenderer
 
 			# starting server, unless host given
 			unless @host
-				@host = 'http://localhost:1823/'
-				@server = exec "http-server -p 1823 #{@public}", (error, stdout, stderr) =>
-					if error
-						@server.kill()
-						return error
-					console.log '[static-renderer] ' + stdout if stdout
-					console.log '[static-renderer] err: ' + stderr if stderr
-				console.log '[static-renderer] starting webserver and serving ' + @public + ' on port 1823'
+				@startServer @render
 			else
 				@host += '/' unless @host.match /\/$/
-				console.log '[static-renderer] loading paths form ' + @host
+				console.log '[static-renderer]: rendering ' + @host
 
-			@render =>
-				@server.kill() if @server
+				@render()
 
 			return
 
-	render: (fn)->
+	startServer: (port, fn) ->
+		if typeof port is 'function'
+			fn = port
+			port = 1823
+
+		@host = "http://localhost:#{port}/"
+		args = ['-p', port, @public]
+		@server = exec "http-server #{args.join(' ')}", (error, stdout, stderr) =>
+			if error
+				unless error.killed
+					@startServer port + 1, fn
+				return
+
+		@server.stdout.on 'data', (data) =>
+			if fn
+				console.log "[static-renderer]: rendering #{@public} hosted on #{@host}"
+				fn.call(this)
+			fn = null
+
+	render: ->
 		procs = []
 		_.each @loadPaths, (path) =>
 			# calling the renderer for each path
-			filename = path + '/index.html'
+			filename = sysPath.join path, 'index.html'
 			proc = exec "phantomjs node_modules/static-phantom-renderer-brunch/lib/renderer.js #{@host}##{path} #{@public} #{filename}", (error, stdout, stderr) ->
-				console.log '[static-renderer] ' + stdout if stdout
-				console.log '[static-renderer] err: ' + stderr if stderr
-				console.log 'exec error: ' + error if error
+				console.log '[static-renderer]: ' + stdout if stdout
+				console.error '[static-renderer]: ' + stderr if stderr
+				console.error error if error
 			procs.push proc
+
 			proc.on 'close', =>
 				procs.pop()
 				if procs.length is 0
-					fn.call() if fn
+					@afterRender()
+
+	afterRender: ->
+		@server.kill() if @server
