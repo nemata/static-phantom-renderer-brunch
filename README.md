@@ -23,4 +23,4 @@ If host is omitted, it will start a node http-server serving the public folder. 
 Add `"static-phantom-renderer-brunch": "0.0.5"` to `package.json` of your brunch app.
 
 If you want to use git version of plugin, add
-`"static-phantom-renderer-brunch": "git+ssh://git@github.com:janschlotte/static-phantom-renderer-brunch.git"`.
+`"static-phantom-renderer-brunch": "git+ssh://git@github.com:nemata/static-phantom-renderer-brunch.git"`.
