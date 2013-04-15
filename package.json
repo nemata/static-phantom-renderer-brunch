@@ -27,7 +27,8 @@
   "dependencies": {
     "coffee-script": "1.3.3",
     "http-server": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "path": "*"
   },
   "devDependencies": {
     "mocha": "1.3.2",
