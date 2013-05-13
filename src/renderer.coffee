@@ -36,7 +36,7 @@ page.open address, (status) ->
 			pre = index.slice 0, beginIndex
 		if beginDocument isnt -1
 			document = document.slice beginDocument, document.length
-		
+
 		endDocument = document.indexOf '<!-- static-renderer END -->'
 
 		post = ""
@@ -45,7 +45,6 @@ page.open address, (status) ->
 		if endDocument isnt -1
 			document = document.slice 0, endDocument
 
-		console.log document
 		html = pre + document + post
 
 		console.log 'writing', path.join(dir, filename) 
