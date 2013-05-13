@@ -24,17 +24,29 @@ page.open address, (status) ->
 		phantom.exit()
 	else
 		page.viewportSize = { width: 320, height: 480 }
-		body = page.evaluate () ->
-			return document.getElementsByTagName('body')[0].outerHTML
+		document = page.evaluate () ->
+			return document.getElementsByTagName('html')[0].outerHTML
 
-		headIndex = index.indexOf '<head>'
+		beginIndex = index.indexOf '<!-- static-renderer BEGIN -->'
+		beginDocument = document.indexOf '<!-- static-renderer BEGIN -->'
+		endIndex = index.indexOf '<!-- static-renderer END -->'
 
-		head = index.slice 0, headIndex
+		pre = ""
+		if beginIndex isnt -1
+			pre = index.slice 0, beginIndex
+		if beginDocument isnt -1
+			document = document.slice beginDocument, document.length
+		
+		endDocument = document.indexOf '<!-- static-renderer END -->'
 
-		header = page.evaluate () ->
-			return document.getElementsByTagName('head')[0].outerHTML
+		post = ""
+		if endIndex isnt -1
+			post = index.slice endIndex, index.length
+		if endDocument isnt -1
+			document = document.slice 0, endDocument
 
-		html = head + header + body + '</hmtl>'
+		console.log document
+		html = pre + document + post
 
 		console.log 'writing', path.join(dir, filename) 
 		fs.write path.join(dir, filename), html, 'w'
