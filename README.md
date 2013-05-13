@@ -32,7 +32,7 @@ Everything before that comment will be copied from app/assets/index.html instead
 Everything after that comment will be copied from app/assets/index.html instead of being evaluated via phantomjs.
 
 ## Usage
-Add `"static-phantom-renderer-brunch": "0.0.5"` to `package.json` of your brunch app.
+Add `"static-phantom-renderer-brunch": "0.0.6"` to `package.json` of your brunch app.
 
 If you want to use git version of plugin, add
 `"static-phantom-renderer-brunch": "git+ssh://git@github.com:nemata/static-phantom-renderer-brunch.git"`.
