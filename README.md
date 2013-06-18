@@ -36,3 +36,6 @@ Add `"static-phantom-renderer-brunch": "0.0.6"` to `package.json` of your brunch
 
 If you want to use git version of plugin, add
 `"static-phantom-renderer-brunch": "git+ssh://git@github.com:nemata/static-phantom-renderer-brunch.git"`.
+
+## License
+static-phantom-renderer-brunch is released under the MIT License (see LICENSE for details).
